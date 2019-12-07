@@ -27,16 +27,17 @@ int nextId = 0;
 
 class lcdButton {
   public:
-  int xPos;
-  int yPos;
-  int width;
-  int height;
+  int xPos = 100;
+  int yPos = 100;
+  int width = 20;
+  int height = 20;
   int buttonId;
-  std::string text;
+  std::string text = "";
   int xMin;
   int xMax;
   int yMin;
   int yMax;
+  int hue = 0;
   
   //_________________________________________________________________________
   //_________________________________________________________________________
@@ -45,89 +46,82 @@ class lcdButton {
   //_________________________________________________________________________
 
   lcdButton(){
-    xPos = 20;
-    yPos = 20;
-    width = 20;
-    height = 20;
     buttonId = nextId;
     nextId++;
-    text = ("BUTTON!!");
-    Brain.Screen.drawRectangle(xPos - (width/2), yPos - (height/2), width, height);
-    insertText(text, width, height, xPos, yPos);
-    xMin = xPos - (width/2);
-    xMax = xPos + (width/2);
-    yMin = yPos - (height/2);
-    yMax = yPos + (height/2);
+    draw();
   }
 
   lcdButton(int x, int y){
+    buttonId = nextId;
+    nextId++;
     xPos = x;
     yPos = y;
-    width = 20;
-    height = 20;
-    text = ("BUTTON!!");
-    Brain.Screen.drawRectangle(xPos - (width/2), yPos - (height/2), width, height);
-    insertText(text, width, height, xPos, yPos);
-    xMin = xPos - (width/2);
-    xMax = xPos + (width/2);
-    yMin = yPos - (height/2);
-    yMax = yPos + (height/2);
+    draw();
   }
 
   lcdButton(int x , int y, int tall){
+    buttonId = nextId;
+    nextId++;
     xPos = x;
     yPos = y;
     width = tall;
     height = tall;
-    text = ("BUTTON!!");
-    Brain.Screen.drawRectangle(xPos - (width/2), yPos - (height/2), width, height);
-    insertText(text, width, height, xPos, yPos);
-    xMin = xPos - (width/2);
-    xMax = xPos + (width/2);
-    yMin = yPos - (height/2);
-    yMax = yPos + (height/2);
+    draw();
   }
 
   lcdButton(int x, int y, std::string chars){
+    buttonId = nextId;
+    nextId++;
     xPos = x;
     yPos = y;
-    width = 20;
-    height = 20;
     text = chars;
-    Brain.Screen.drawRectangle(xPos - (width/2), yPos - (height/2), width, height);
-    insertText(text, width, height, xPos, yPos);
-    xMin = xPos - (width/2);
-    xMax = xPos + (width/2);
-    yMin = yPos - (height/2);
-    yMax = yPos + (height/2);
+    draw();
   }
 
   lcdButton(int x, int y, int tall, std::string chars){
+    buttonId = nextId;
+    nextId++;
     xPos = x;
     yPos = y;
     width = tall;
     height = tall;
     text = chars;
-    Brain.Screen.drawRectangle(xPos - (width/2), yPos - (height/2), width, height);
-    insertText(text, width, height, xPos, yPos);
-    xMin = xPos - (width/2);
-    xMax = xPos + (width/2);
-    yMin = yPos - (height/2);
-    yMax = yPos + (height/2);
+    draw();
   }
 
   lcdButton(int x, int y, int tall, int wide, std::string chars){
+    buttonId = nextId;
+    nextId++;
     xPos = x;
     yPos = y;
     width = wide;
     height = tall;
     text = chars;
-    Brain.Screen.drawRectangle(xPos - (width/2), yPos - (height/2), width, height);
-    insertText(text, width, height, xPos, yPos);
-    xMin = xPos - (width/2);
-    xMax = xPos + (width/2);
-    yMin = yPos - (height/2);
-    yMax = yPos + (height/2);
+    draw();
+  }
+
+  lcdButton(int x, int y, int tall, int wide, int colorHue){
+    buttonId = nextId;
+    nextId++;
+    xPos = x;
+    yPos = y;
+    width = wide;
+    height = tall;
+    hue = colorHue;
+    draw();
+
+  }
+
+  lcdButton(int x, int y, int tall, int wide, std::string chars, int colorHue){
+    buttonId = nextId;
+    nextId++;
+    xPos = x;
+    yPos = y;
+    width = wide;
+    height = tall;
+    text = chars;
+    hue = colorHue;
+    draw();
   }
 
   //_________________________________________________________________________
@@ -140,16 +134,35 @@ class lcdButton {
   void moveTo(int x, int y){
     this->xPos = x;
     this->yPos = y;
+    draw();
   }
 
   void setText(std::string chars){
     this->text = chars;
+    draw();
   }
 
   void setSize(int tall, int width){
     this->height = tall;
     this->width = width;
+    draw();
   }
+
+  void setColor(int colorHue){
+    hue = colorHue;
+    draw();
+  }
+
+  void draw(){
+    xMin = xPos - (width/2);
+    xMax = xPos + (width/2);
+    yMin = yPos - (height/2);
+    yMax = yPos + (height/2);
+    Brain.Screen.drawRectangle(xPos - (width/2), yPos - (height/2), width, height, hue);
+    insertText(text, width, height, xPos, yPos);
+  }
+
+//________________________________________________________________________________________________
 
   bool pressing(){
     if(Brain.Screen.pressing() && Brain.Screen.xPosition() < xMax && Brain.Screen.xPosition() > xMin && Brain.Screen.yPosition() < yMax && Brain.Screen.yPosition() > yMin){

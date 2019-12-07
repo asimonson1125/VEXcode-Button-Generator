@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
-/*    Author:       simonand                                                  */
+/*    Author:       Andrew Simonson (Team 96807B)                             */
 /*    Created:      Fri Dec 06 2019                                           */
 /*    Description:  V5 project                                                */
 /*                                                                            */
