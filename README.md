@@ -14,7 +14,7 @@ ___
 ___
 
 
-###Button attributes:
+### Button attributes:
  - centered position in coordinate plane
  - button color
  - button dimensions
