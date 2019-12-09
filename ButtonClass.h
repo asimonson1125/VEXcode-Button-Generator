@@ -19,25 +19,35 @@ void insertText(std::string text, int width, int height, int xi, int yi, int Fty
   switch(Ftype){
     case 0: switch(Fsize){
       case 12: Brain.Screen.setFont(mono12);
+        break;
       case 15: Brain.Screen.setFont(mono15);
+        break;
       case 20: Brain.Screen.setFont(mono20);
+        break;
       case 30: Brain.Screen.setFont(mono30);
+        break;
       case 40: Brain.Screen.setFont(mono40);
-      break;
+        break;
     };
+    break;
 
     case 1: switch(Fsize){
       case 20: Brain.Screen.setFont(prop20);
+        break;
       case 30: Brain.Screen.setFont(prop30);
+        break;
       case 40: Brain.Screen.setFont(prop40);
+        break;
       case 60: Brain.Screen.setFont(prop60);
-      break;
+        break;
     };
+    break;
 
     case 2: switch(Fsize){
       //case 15: Brain.Screen.setFont(cjk16);
       break;
     };
+    break;
   }
 //WHAT IS MONOXL I DID NOT SIGN UP FOR THIS
 
@@ -88,36 +98,6 @@ class lcdButton {
     draw();
   }
 
-  lcdButton(int x , int y, int tall){
-    buttonId = nextId;
-    nextId++;
-    xPos = x;
-    yPos = y;
-    width = tall;
-    height = tall;
-    draw();
-  }
-
-  lcdButton(int x, int y, std::string chars){
-    buttonId = nextId;
-    nextId++;
-    xPos = x;
-    yPos = y;
-    text = chars;
-    draw();
-  }
-
-  lcdButton(int x, int y, int tall, std::string chars){
-    buttonId = nextId;
-    nextId++;
-    xPos = x;
-    yPos = y;
-    width = tall;
-    height = tall;
-    text = chars;
-    draw();
-  }
-
   lcdButton(int x, int y, int tall, int wide, std::string chars){
     buttonId = nextId;
     nextId++;
@@ -152,6 +132,38 @@ class lcdButton {
     hue = colorHue;
     draw();
   }
+  
+  //hide the ones below by the master constructor, damn it thicc.
+  lcdButton(int x, int y, std::string chars){
+    buttonId = nextId;
+    nextId++;
+    xPos = x;
+    yPos = y;
+    text = chars;
+    draw();
+  }
+
+  lcdButton(int x, int y, int wide, std::string chars){
+    buttonId = nextId;
+    nextId++;
+    xPos = x;
+    yPos = y;
+    width = wide;
+    height = wide;
+    text = chars;
+    draw();
+  }
+  
+  lcdButton(int x , int y, int wide){
+    buttonId = nextId;
+    nextId++;
+    xPos = x;
+    yPos = y;
+    width = wide;
+    height = wide;
+    draw();
+  }
+  
 
   //_________________________________________________________________________
   //_________________________________________________________________________
