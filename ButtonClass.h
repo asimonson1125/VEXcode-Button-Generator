@@ -98,7 +98,7 @@ class lcdButton {
     draw();
   }
 
-  lcdButton(int x, int y, int tall, int wide, std::string chars){
+  lcdButton(int x, int y, int wide, int tall, std::string chars){
     buttonId = nextId;
     nextId++;
     xPos = x;
@@ -109,7 +109,7 @@ class lcdButton {
     draw();
   }
 
-  lcdButton(int x, int y, int tall, int wide, int colorHue){
+  lcdButton(int x, int y, int wide, int tall, int colorHue){
     buttonId = nextId;
     nextId++;
     xPos = x;
@@ -121,7 +121,7 @@ class lcdButton {
 
   }
 
-  lcdButton(int x, int y, int tall, int wide, std::string chars, int colorHue){
+  lcdButton(int x, int y, int wide, int tall, std::string chars, int colorHue){
     buttonId = nextId;
     nextId++;
     xPos = x;
@@ -183,7 +183,7 @@ class lcdButton {
     draw();
   }
 
-  void setSize(int tall, int width){
+  void setSize(int wide, int tall){
     height = tall;
     width = width;
     draw();
