@@ -12,9 +12,7 @@
 #include "vex.h"
 
 
-void insertText(std::string text, int width, int height, int xi, int yi, int Ftype, int Fsize){
-  int x;
-  int y;
+void insertText(std::string text, int width, int height, int xi, int yi){
   const char *string = text.c_str();
   switch(Ftype){
     case 0: switch(Fsize){
@@ -68,9 +66,8 @@ class lcdButton {
   int yPos = 100;
   int width = 20;
   int height = 20;
-  int hue = 0;
-  int font = 0;
-  int fontsize = 10;
+  int hue = -1;
+  std::string hex = "#707070";
   std::string text = "";
 
   int xMin;
@@ -132,18 +129,45 @@ class lcdButton {
     hue = colorHue;
     draw();
   }
-  
-  //hide the ones below by the master constructor, damn it thicc.
-  lcdButton(int x, int y, std::string chars){
+
+
+  /*lcdButton(int x, int y, int wide, int tall, std::string chars){
     buttonId = nextId;
     nextId++;
     xPos = x;
     yPos = y;
     text = chars;
     draw();
+  }*/
+
+  //string assumes color, not text
+
+  lcdButton(int x, int y, int wide, int tall, std::string colorHex){
+    buttonId = nextId;
+    nextId++;
+    xPos = x;
+    yPos = y;
+    width = wide;
+    height = tall;
+    hex = colorHex;
+    draw();
+
   }
 
-  lcdButton(int x, int y, int wide, std::string chars){
+
+  lcdButton(int x, int y, int wide, int tall, std::string chars, std::string colorHex){
+    buttonId = nextId;
+    nextId++;
+    xPos = x;
+    yPos = y;
+    width = wide;
+    height = tall;
+    text = chars;
+    hex = colorHex;
+    draw();
+  }
+
+  lcdButton(int x, int y, int wide, int tall, int colorHue){
     buttonId = nextId;
     nextId++;
     xPos = x;
@@ -154,7 +178,8 @@ class lcdButton {
     draw();
   }
   
-  lcdButton(int x , int y, int wide){
+
+  lcdButton(int x, int y, int wide, int tall, std::string chars, int colorHue){
     buttonId = nextId;
     nextId++;
     xPos = x;
@@ -190,16 +215,15 @@ class lcdButton {
   }
 
   void setColor(int colorHue){
+    hex = "using hue";
     hue = colorHue;
     draw();
   }
 
-  void setFont(int chosen){
-    font = chosen;
-  }
-
-  void setFontSize(int chosen){
-    fontsize = chosen;
+  void setColor(std::string colorHex){
+    hue = -1;
+    hex = colorHex;
+    draw();
   }
 
   void draw(){
@@ -207,8 +231,14 @@ class lcdButton {
     xMax = xPos + (width/2);
     yMin = yPos - (height/2);
     yMax = yPos + (height/2);
-    Brain.Screen.drawRectangle(xPos - (width/2), yPos - (height/2), width, height, hue);
-    insertText(text, width, height, xPos, yPos, font, fontsize);
+    if(hue != -1){ //determine if using hue int or hex string
+      Brain.Screen.drawRectangle(xPos - (width/2), yPos - (height/2), width, height, hue);
+    }
+    else{ //using hex
+      const char *string = hex.c_str();
+      Brain.Screen.drawRectangle(xPos - (width/2), yPos - (height/2), width, height, string);
+    }
+    insertText(text, width, height, xPos, yPos);
   }
 
 //________________________________________________________________________________________________
