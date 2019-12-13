@@ -12,7 +12,7 @@
 #include "vex.h"
 
 
-void insertText(std::string text, int width, int height, int xi, int yi){
+void insertText(std::string text, int width, int height, int xi, int yi, int Ftype, int Fsize){
   const char *string = text.c_str();
   switch(Ftype){
     case 0: switch(Fsize){
@@ -49,8 +49,8 @@ void insertText(std::string text, int width, int height, int xi, int yi){
   }
 //WHAT IS MONOXL I DID NOT SIGN UP FOR THIS
 
-  x = xi - (vexDisplayStringWidthGet(string)/2);
-  y = yi + (vexDisplayStringHeightGet(string)/4);
+  int x = xi - (vexDisplayStringWidthGet(string)/2);
+  int y = yi + (vexDisplayStringHeightGet(string)/4);
   Brain.Screen.printAt(x, y, string);
 }
 
@@ -69,6 +69,8 @@ class lcdButton {
   int hue = -1;
   std::string hex = "#707070";
   std::string text = "";
+  int font = 0;
+  int fontsize = 10;
 
   int xMin;
   int xMax;
@@ -80,80 +82,6 @@ class lcdButton {
   //constructors
   //_________________________________________________________________________
   //_________________________________________________________________________
-
-  lcdButton(){
-    buttonId = nextId;
-    nextId++;
-    draw();
-  }
-
-  lcdButton(int x, int y){
-    buttonId = nextId;
-    nextId++;
-    xPos = x;
-    yPos = y;
-    draw();
-  }
-
-  lcdButton(int x, int y, int wide, int tall, std::string chars){
-    buttonId = nextId;
-    nextId++;
-    xPos = x;
-    yPos = y;
-    width = wide;
-    height = tall;
-    text = chars;
-    draw();
-  }
-
-  lcdButton(int x, int y, int wide, int tall, int colorHue){
-    buttonId = nextId;
-    nextId++;
-    xPos = x;
-    yPos = y;
-    width = wide;
-    height = tall;
-    hue = colorHue;
-    draw();
-
-  }
-
-  lcdButton(int x, int y, int wide, int tall, std::string chars, int colorHue){
-    buttonId = nextId;
-    nextId++;
-    xPos = x;
-    yPos = y;
-    width = wide;
-    height = tall;
-    text = chars;
-    hue = colorHue;
-    draw();
-  }
-
-
-  /*lcdButton(int x, int y, int wide, int tall, std::string chars){
-    buttonId = nextId;
-    nextId++;
-    xPos = x;
-    yPos = y;
-    text = chars;
-    draw();
-  }*/
-
-  //string assumes color, not text
-
-  lcdButton(int x, int y, int wide, int tall, std::string colorHex){
-    buttonId = nextId;
-    nextId++;
-    xPos = x;
-    yPos = y;
-    width = wide;
-    height = tall;
-    hex = colorHex;
-    draw();
-
-  }
-
 
   lcdButton(int x, int y, int wide, int tall, std::string chars, std::string colorHex){
     buttonId = nextId;
@@ -167,17 +95,62 @@ class lcdButton {
     draw();
   }
 
+  lcdButton(int x, int y, int wide, int tall, std::string colorHex){
+    buttonId = nextId;
+    nextId++;
+    xPos = x;
+    yPos = y;
+    width = wide;
+    height = tall;
+    hex = colorHex;
+    draw();
+  }
+
+  lcdButton(int x , int y, int tall){
+    buttonId = nextId;
+    nextId++;
+    xPos = x;
+    yPos = y;
+    width = tall;
+    height = tall;
+    draw();
+  }
+
+  lcdButton(int x, int y, int tall, std::string chars){
+    buttonId = nextId;
+    nextId++;
+    xPos = x;
+    yPos = y;
+    width = tall;
+    height = tall;
+    text = chars;
+    draw();
+  }
+
+  /*lcdButton(int x, int y, int wide, int tall, std::string chars){
+    buttonId = nextId;
+    nextId++;
+    xPos = x;
+    yPos = y;
+    width = wide;
+    height = tall;
+    text = chars;
+    draw();
+  }*/
+
+  //string assumes color, not text
+
   lcdButton(int x, int y, int wide, int tall, int colorHue){
     buttonId = nextId;
     nextId++;
     xPos = x;
     yPos = y;
     width = wide;
-    height = wide;
-    text = chars;
+    height = tall;
+    hue = colorHue;
     draw();
+
   }
-  
 
   lcdButton(int x, int y, int wide, int tall, std::string chars, int colorHue){
     buttonId = nextId;
@@ -185,7 +158,9 @@ class lcdButton {
     xPos = x;
     yPos = y;
     width = wide;
-    height = wide;
+    height = tall;
+    text = chars;
+    hue = colorHue;
     draw();
   }
   
@@ -196,6 +171,14 @@ class lcdButton {
   //Functions
   //_________________________________________________________________________
   //_________________________________________________________________________
+
+  void setFont(int chosen){
+    font = chosen;
+  }
+
+  void setFontSize(int chosen){
+    fontsize = chosen;
+  }
 
   void moveTo(int x, int y){
     xPos = x;
@@ -210,7 +193,7 @@ class lcdButton {
 
   void setSize(int wide, int tall){
     height = tall;
-    width = width;
+    width = wide;
     draw();
   }
 
@@ -238,7 +221,7 @@ class lcdButton {
       const char *string = hex.c_str();
       Brain.Screen.drawRectangle(xPos - (width/2), yPos - (height/2), width, height, string);
     }
-    insertText(text, width, height, xPos, yPos);
+    insertText(text, width, height, xPos, yPos, font, fontsize);
   }
 
 //________________________________________________________________________________________________
@@ -252,3 +235,4 @@ class lcdButton {
     }
   }
 };
+
