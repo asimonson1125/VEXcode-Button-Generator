@@ -14,8 +14,43 @@
 
 void insertText(std::string text, int width, int height, int xi, int yi){
   const char *string = text.c_str();
-  int x = xi - (vexDisplayStringWidthGet(string)/2);
-  int y = yi + (vexDisplayStringHeightGet(string)/4);
+  switch(Ftype){
+    case 0: switch(Fsize){
+      case 12: Brain.Screen.setFont(mono12);
+        break;
+      case 15: Brain.Screen.setFont(mono15);
+        break;
+      case 20: Brain.Screen.setFont(mono20);
+        break;
+      case 30: Brain.Screen.setFont(mono30);
+        break;
+      case 40: Brain.Screen.setFont(mono40);
+        break;
+    };
+    break;
+
+    case 1: switch(Fsize){
+      case 20: Brain.Screen.setFont(prop20);
+        break;
+      case 30: Brain.Screen.setFont(prop30);
+        break;
+      case 40: Brain.Screen.setFont(prop40);
+        break;
+      case 60: Brain.Screen.setFont(prop60);
+        break;
+    };
+    break;
+
+    case 2: switch(Fsize){
+      //case 15: Brain.Screen.setFont(cjk16);
+      break;
+    };
+    break;
+  }
+//WHAT IS MONOXL I DID NOT SIGN UP FOR THIS
+
+  x = xi - (vexDisplayStringWidthGet(string)/2);
+  y = yi + (vexDisplayStringHeightGet(string)/4);
   Brain.Screen.printAt(x, y, string);
 }
 
@@ -60,37 +95,7 @@ class lcdButton {
     draw();
   }
 
-  lcdButton(int x , int y, int tall){
-    buttonId = nextId;
-    nextId++;
-    xPos = x;
-    yPos = y;
-    width = tall;
-    height = tall;
-    draw();
-  }
-
-  lcdButton(int x, int y, std::string chars){
-    buttonId = nextId;
-    nextId++;
-    xPos = x;
-    yPos = y;
-    text = chars;
-    draw();
-  }
-
-  lcdButton(int x, int y, int tall, std::string chars){
-    buttonId = nextId;
-    nextId++;
-    xPos = x;
-    yPos = y;
-    width = tall;
-    height = tall;
-    text = chars;
-    draw();
-  }
-
-  /*lcdButton(int x, int y, int wide, int tall, std::string chars){
+  lcdButton(int x, int y, int wide, int tall, std::string chars){
     buttonId = nextId;
     nextId++;
     xPos = x;
@@ -98,32 +103,6 @@ class lcdButton {
     width = wide;
     height = tall;
     text = chars;
-    draw();
-  }*/
-
-  //string assumes color, not text
-
-  lcdButton(int x, int y, int wide, int tall, std::string colorHex){
-    buttonId = nextId;
-    nextId++;
-    xPos = x;
-    yPos = y;
-    width = wide;
-    height = tall;
-    hex = colorHex;
-    draw();
-
-  }
-
-  lcdButton(int x, int y, int wide, int tall, std::string chars, std::string colorHex){
-    buttonId = nextId;
-    nextId++;
-    xPos = x;
-    yPos = y;
-    width = wide;
-    height = tall;
-    text = chars;
-    hex = colorHex;
     draw();
   }
 
@@ -151,6 +130,66 @@ class lcdButton {
     draw();
   }
 
+
+  /*lcdButton(int x, int y, int wide, int tall, std::string chars){
+    buttonId = nextId;
+    nextId++;
+    xPos = x;
+    yPos = y;
+    text = chars;
+    draw();
+  }*/
+
+  //string assumes color, not text
+
+  lcdButton(int x, int y, int wide, int tall, std::string colorHex){
+    buttonId = nextId;
+    nextId++;
+    xPos = x;
+    yPos = y;
+    width = wide;
+    height = tall;
+    hex = colorHex;
+    draw();
+
+  }
+
+
+  lcdButton(int x, int y, int wide, int tall, std::string chars, std::string colorHex){
+    buttonId = nextId;
+    nextId++;
+    xPos = x;
+    yPos = y;
+    width = wide;
+    height = tall;
+    text = chars;
+    hex = colorHex;
+    draw();
+  }
+
+  lcdButton(int x, int y, int wide, int tall, int colorHue){
+    buttonId = nextId;
+    nextId++;
+    xPos = x;
+    yPos = y;
+    width = wide;
+    height = wide;
+    text = chars;
+    draw();
+  }
+  
+
+  lcdButton(int x, int y, int wide, int tall, std::string chars, int colorHue){
+    buttonId = nextId;
+    nextId++;
+    xPos = x;
+    yPos = y;
+    width = wide;
+    height = wide;
+    draw();
+  }
+  
+
   //_________________________________________________________________________
   //_________________________________________________________________________
 
@@ -169,7 +208,7 @@ class lcdButton {
     draw();
   }
 
-  void setSize(int tall, int width){
+  void setSize(int wide, int tall){
     height = tall;
     width = width;
     draw();
