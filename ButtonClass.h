@@ -68,11 +68,12 @@ class lcdButton {
   int width = 20;
   int height = 20;
   int hue = -1;
-  std::string hex = "#707070";
+  std::string hex = "#353535";
   std::string text = "";
   int font = 0;
   int fontsize = 10;
-  std::string outline = "white";
+  std::string outlinehex = "white";
+  int outlinehue = -1;
   int thickness = 2;
 
   int xMin;
@@ -212,13 +213,35 @@ class lcdButton {
     draw();
   }
 
+  void setOutlineThickness(int thick){
+    thickness = thick;
+    draw();
+  }
+
+  void setOutlineColor(std::string colored){
+    outlinehex = colored;
+    outlinehue = -1;
+  }
+
+  void setOutlineColor(int colored){
+    outlinehue = colored;
+    outlinehex = "using hue";
+  }
+
   void draw(){
     xMin = xPos - (width/2);
     xMax = xPos + (width/2);
     yMin = yPos - (height/2);
     yMax = yPos + (height/2);
-    Brain.Screen.setPenColor(outline.c_str());
+    if(outlinehue != -1){
+      Brain.Screen.setPenColor(outlinehue);
+    }
+    else{
+      Brain.Screen.setPenColor(outlinehex.c_str());
+    }
+
     Brain.Screen.setPenWidth(thickness);
+
     if(hue != -1){ //determine if using hue int or hex string
       Brain.Screen.drawRectangle(xPos - (width/2), yPos - (height/2), width, height, hue);
     }
@@ -226,6 +249,7 @@ class lcdButton {
       const char *string = hex.c_str();
       Brain.Screen.drawRectangle(xPos - (width/2), yPos - (height/2), width, height, string);
     }
+
     insertText(text, width, height, xPos, yPos, font, fontsize);
   }
 

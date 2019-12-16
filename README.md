@@ -18,17 +18,18 @@ ___
  - centered position in coordinate plane
  - button color
  - button dimensions
- - button color (hue)
+ - button color in hue (int), hex (string, ie "#FFFFFF"), or a preset color (string, ie "white")
+ - outline color in hue (int), hex (string, ie "#FFFFFF"), or a preset color (string, ie "white")
+ - outline thickness
  - text inside button
- - text font
- - text size
 
 
 WIP:
  - use custom images from SD card
- - redraw button automatically after parameter change
+ - text font
+ - text size
 
 ### Limitations:
 Press detection is limited to rectangular shapes, it cannot accurately detect presses for other shapes.
 
-Cannot delete previously drawn buttons or automatically redraw a button - to display changes in a button the screen must be cleared and then be redrawn with button.draw(); while the press detection changes immediately after being updated.
+Cannot delete previously drawn buttons or automatically redraw a button - to display changes in a button the screen must be cleared and then be redrawn with button.draw(); while the press detection changes immediately after being updated.  This is due to the screen's inability to identify objects.  Any deletion of objects would hae to clear the entire screen.
