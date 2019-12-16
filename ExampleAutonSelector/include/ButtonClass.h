@@ -110,15 +110,67 @@ class lcdButton {
     draw();
   }
 
-  lcdButton(int x , int y, int tall){
+  lcdButton(int x, int y, int wide, int tall, std::string chars, std::string colorHex, std::string outHex, int outThickness){
     buttonId = nextId;
     nextId++;
     xPos = x;
     yPos = y;
-    width = tall;
+    width = wide;
     height = tall;
+    text = chars;
+    hex = colorHex;
+    outlinehex = outHex;
+    thickness = outThickness;
     draw();
   }
+
+  lcdButton(int x, int y, int wide, int tall, std::string chars, int colorHue, std::string outHex, int outThickness){
+    buttonId = nextId;
+    nextId++;
+    xPos = x;
+    yPos = y;
+    width = wide;
+    height = tall;
+    text = chars;
+    hue = colorHue;
+    hex = "using hue";
+    outlinehex = outHex;
+    thickness = outThickness;
+    draw();
+  }
+
+  lcdButton(int x, int y, int wide, int tall, std::string chars, std::string colorHex, int outHue, int outThickness){
+    buttonId = nextId;
+    nextId++;
+    xPos = x;
+    yPos = y;
+    width = wide;
+    height = tall;
+    text = chars;
+    hex = colorHex;
+    outlinehue = outHue;
+    outlinehex = "using hue";
+    thickness = outThickness;
+    draw();
+  }
+
+  lcdButton(int x, int y, int wide, int tall, std::string chars, int colorHue, int outHue, int outThickness){
+    buttonId = nextId;
+    nextId++;
+    xPos = x;
+    yPos = y;
+    width = wide;
+    height = tall;
+    text = chars;
+    hue = colorHue;
+    hex = "using hue";
+    outlinehue = outHue;
+    outlinehex = "using hue";
+    thickness = outThickness;
+    draw();
+  }
+
+//end intended helper view --------------------------------
 
   lcdButton(int x, int y, int tall, std::string chars){
     buttonId = nextId;
@@ -152,6 +204,7 @@ class lcdButton {
     width = wide;
     height = tall;
     hue = colorHue;
+    hex = "using hue";
     draw();
 
   }
@@ -165,6 +218,7 @@ class lcdButton {
     height = tall;
     text = chars;
     hue = colorHue;
+    hex = "using hue";
     draw();
   }
   
