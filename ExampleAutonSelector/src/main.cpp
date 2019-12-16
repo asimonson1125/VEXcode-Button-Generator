@@ -17,22 +17,25 @@ using namespace vex;
 
 
 int xplace = 70;
-int ColorChosen = 0;
+int ColorChosen = 1;
 
-lcdButton redButton(95, 30, 150, 40, "RED", color(70,70,70));
-lcdButton blueButton(480-95, 30, 150, 40, "BLUE", color(70,70,70));
+lcdButton redButton(123, 22, 230, 35, "RED", "#252525");
+lcdButton blueButton(480-123, 22, 230, 35, "BLUE", "#252525");
 
-lcdButton confirm(300,150,100,60, "CONFIRM",color(33,255,66));
-lcdButton none(xplace,90,120,40, "None", color(70,70,70));
+lcdButton confirm(300,150,100,60, "CONFIRM","#14c40e");
+lcdButton none(xplace,90,120,40, "None", "#252525");
 
-lcdButton redrun(1000,135,120,40, "RedRun");//, color(255, 33, 33));
-lcdButton red4(1000,180,120,40, "Red4");//, color(255, 33, 33));
-lcdButton bluerun(1000,135,120,40, "BlueRun", 16777215); //figure out color scheme
-lcdButton blue4(1000,180,120,40, "Blue4", color(51, 51, 255));
+lcdButton redrun(xplace,135,120,40, "RedRun", "#FF2525");//, color(255, 33, 33));
+lcdButton red4(xplace,180,120,40, "Red4", "#FF2525");//, color(255, 33, 33));
+lcdButton bluerun(1000,135,120,40, "BlueRun", "#2525FF"); //figure out color scheme
+lcdButton blue4(1000,180,120,40, "Blue4", "#2525FF");
 
 
 void drawTonomous(){
   Brain.Screen.clearScreen("black");
+  Brain.Screen.setPenColor(white);
+  Brain.Screen.setPenWidth(2);
+  Brain.Screen.drawLine(0,60,500,60);
   redButton.draw();
   blueButton.draw();
   confirm.draw();
