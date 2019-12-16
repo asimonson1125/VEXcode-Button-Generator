@@ -22,14 +22,10 @@ ___
  - outline color in hue (int), hex (string, ie "#FFFFFF"), or a preset color (string, ie "white")
  - outline thickness
  - text inside button
-
-
-WIP:
- - use custom images from SD card
  - text font
  - text size
+ - ~~use custom images from SD card~~ *decided this capability is beyond the scope of the project, which is intended to be a basic button generator for newer teams.  Sorry to anyone who was looking forward to that.*
 
-### Limitations:
-Press detection is limited to rectangular shapes, it cannot accurately detect presses for other shapes.
-
-Cannot delete previously drawn buttons or automatically redraw a button - to display changes in a button the screen must be cleared and then be redrawn with button.draw(); while the press detection changes immediately after being updated.  This is due to the screen's inability to identify objects.  Any deletion of objects would hae to clear the entire screen.
+### Notable Limitation:
+Cannot delete previously drawn buttons or automatically redraw a button.  This is due to the screen's inability to identify objects.  Any deletion of objects would hae to clear the entire screen.
+The new button will automatically be drawn and the button detection will move to the new coordinates, but the previous button will still be drawn on the screen.
