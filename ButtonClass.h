@@ -51,6 +51,7 @@ void insertText(std::string text, int width, int height, int xi, int yi, int Fty
 
   int x = xi - (vexDisplayStringWidthGet(string)/2);
   int y = yi + (vexDisplayStringHeightGet(string)/4);
+  Brain.Screen.setPenColor(white);
   Brain.Screen.printAt(x, y, string);
 }
 
@@ -71,6 +72,8 @@ class lcdButton {
   std::string text = "";
   int font = 0;
   int fontsize = 10;
+  std::string outline = "white";
+  int thickness = 2;
 
   int xMin;
   int xMax;
@@ -214,6 +217,8 @@ class lcdButton {
     xMax = xPos + (width/2);
     yMin = yPos - (height/2);
     yMax = yPos + (height/2);
+    Brain.Screen.setPenColor(outline.c_str());
+    Brain.Screen.setPenWidth(thickness);
     if(hue != -1){ //determine if using hue int or hex string
       Brain.Screen.drawRectangle(xPos - (width/2), yPos - (height/2), width, height, hue);
     }
@@ -235,4 +240,3 @@ class lcdButton {
     }
   }
 };
-
