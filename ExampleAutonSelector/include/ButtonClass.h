@@ -12,7 +12,7 @@
 #include "vex.h"
 
 
-void insertText(std::string text, int width, int height, int xi, int yi, int Ftype, int Fsize){
+void insertText(std::string text, int width, int height, int xi, int yi, int Ftype, int Fsize, int penHue, std::string penHex){
   const char *string = text.c_str();
   switch(Ftype){
     case 0: switch(Fsize){
@@ -51,7 +51,12 @@ void insertText(std::string text, int width, int height, int xi, int yi, int Fty
 
   int x = xi - (vexDisplayStringWidthGet(string)/2);
   int y = yi + (vexDisplayStringHeightGet(string)/4);
-  Brain.Screen.setPenColor(white);
+  if(penHue != -1){
+    Brain.Screen.setPenColor(penHue);
+  }
+  else{
+    Brain.Screen.setPenColor(penHex.c_str());
+  }
   Brain.Screen.printAt(x, y, string);
 }
 
@@ -71,7 +76,9 @@ class lcdButton {
   std::string hex = "#353535";
   std::string text = "";
   int font = 0;
-  int fontsize = 10;
+  int fontsize = 20;
+  int penHue = -1;
+  std::string penHex = "#FFFFFF";
   std::string outlinehex = "white";
   int outlinehue = -1;
   int thickness = 2;
@@ -230,6 +237,16 @@ class lcdButton {
   //_________________________________________________________________________
   //_________________________________________________________________________
 
+  void setPenColor(std::string input){
+    penHex = input;
+    penHue = -1;
+  }
+
+  void setPenColor(int input){
+    penHue = input;
+    penHex = "using hue";
+  }
+
   void setFont(int chosen){
     font = chosen;
   }
@@ -304,7 +321,7 @@ class lcdButton {
       Brain.Screen.drawRectangle(xPos - (width/2), yPos - (height/2), width, height, string);
     }
 
-    insertText(text, width, height, xPos, yPos, font, fontsize);
+    insertText(text, width, height, xPos, yPos, font, fontsize, penHue, penHex);
   }
 
 //________________________________________________________________________________________________
