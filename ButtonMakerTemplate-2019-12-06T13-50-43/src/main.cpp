@@ -18,26 +18,31 @@ using namespace vex;
 int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
+  while(true){
+    //insert your code here
+  }
 
-  lcdButton Greg(200,200,50,500,"to victory!");
 
-  lcdButton Josh(100,100,75,75,"yeet!");
-
+//Here's an example of the button generator's use.  Have at it.
+/*
+  //create the buttons with shorter constructor (center x, center y, width, height, text, color)
+  lcdButton Greg(250,100,100,50,"I am Greg", "#FF2525"); 
+  lcdButton Josh(100,100,100,75,"I am Josh", "#2525FF");
+  //create cooldowns so you have time to lift your finger
   int GregCooldown = 0;
   int JoshCooldown = 0;
-
   while(1){
-    if(Greg.pressing() && GregCooldown < 1){
-      Brain.Screen.print("EY!");
-      GregCooldown = 100;
+    if(Greg.pressing() && GregCooldown < 1){ //check if greg is being pressed
+      Brain.Screen.print("Greg Has Been Pressed.");
+      GregCooldown = 100; //set cooldown
     }
-    if(Josh.pressing() && JoshCooldown < 1){
-      Brain.Screen.print("ok boomer");
-      JoshCooldown = 100;
+    if(Josh.pressing() && JoshCooldown < 1){ //check if Josh is being pressed
+      Brain.Screen.print("Josh Has Been Pressed.");
+      JoshCooldown = 100; //set cooldown
     }
     task::sleep(10);
-    GregCooldown--;
+    GregCooldown--; //cool down cooldown
     JoshCooldown--;
-  }
+  }*/
   
 }
