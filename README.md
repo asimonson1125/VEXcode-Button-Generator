@@ -128,5 +128,5 @@ outline thickness = 2
 
 ___
 ### Notable Limitation:
-Cannot delete previously drawn buttons or automatically redraw a button.  This is due to the screen's inability to identify objects.  Any deletion of objects would hae to clear the entire screen.
+Cannot delete previously drawn buttons or automatically redraw a button.  This is due to the screen's inability to identify objects.  Any deletion of objects would have to clear the entire screen.
 The new button will automatically be drawn and the button detection will move to the new coordinates, but the previous button will still be drawn on the screen.
